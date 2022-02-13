@@ -19,6 +19,13 @@ function App() {
     console.log(searchTerm);
   }
 
+  function handleKeyPress(event) {
+    if (event.which === 13 || event.keyCode === 13) {
+      setSearchTerm(searchInput);
+      console.log(searchTerm);
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
@@ -38,7 +45,11 @@ function App() {
 
   return (
     <>
-      <Search onClick={handleSearchClick} onChange={handleChange} />
+      <Search
+        onClick={handleSearchClick}
+        onChange={handleChange}
+        onKeyDown={handleKeyPress}
+      />
       <Result
         city={data.name}
         country={data.sys.country}
