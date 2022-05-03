@@ -9,22 +9,14 @@ function App() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
-  function handleChange(event) {
-    setSearchInput(event.target.value);
-    console.log(searchInput);
-  }
+  const handleChange = (e) => {
+    setSearchInput(e.target.value);
+  };
 
-  function handleSearchClick(event) {
+  const handleSearchClick = (e) => {
     setSearchTerm(searchInput);
-    console.log(searchTerm);
-  }
-
-  function handleKeyPress(event) {
-    if (event.which === 13 || event.keyCode === 13) {
-      setSearchTerm(searchInput);
-      console.log(searchTerm);
-    }
-  }
+    console.log(searchTerm, "searchTerms");
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -43,21 +35,19 @@ function App() {
     return <div> Loading ... </div>;
   }
 
+  const result = {
+    city: data.name,
+    country: data.sys.country,
+    weather: data.weather[0].main,
+    temperature: data.main.temp,
+    humidity: data.main.humidity,
+    windSpeed: data.wind.speed,
+  };
+
   return (
     <>
-      <Search
-        onClick={handleSearchClick}
-        onChange={handleChange}
-        onKeyDown={handleKeyPress}
-      />
-      <Result
-        city={data.name}
-        country={data.sys.country}
-        weather={data.weather[0].description}
-        temperature={Math.round(data.main.temp)}
-        humidity={data.main.humidity}
-        windSpeed={Math.round(data.wind.speed)}
-      />
+      <Search onClick={handleSearchClick} onChange={handleChange} />
+      <Result result={result} />
     </>
   );
 }

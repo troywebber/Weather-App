@@ -1,15 +1,15 @@
 import "./index.css";
 
-function Result({ city, country, weather, temperature, humidity, windSpeed }) {
+function Result({ result }) {
   return (
     <div className="resultContainer">
       <div className="result">
-        <h1>{city}</h1>
-        <h2>{country}</h2>
-        <h3>{weather}</h3>
-        <h3>{temperature}℃</h3>
-        <h3>Humidity {humidity}% </h3>
-        <h3>Wind speed {windSpeed} mph</h3>
+        <h1>{result.city}</h1>
+        <h2>{result.country}</h2>
+        <h3>{result.weather}</h3>
+        <h3>{result.temperature}℃</h3>
+        <h3>Humidity {result.humidity}% </h3>
+        <h3>Wind speed {result.windSpeed} mph</h3>
       </div>
     </div>
   );
