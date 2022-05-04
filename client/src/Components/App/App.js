@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .post("http://localhost:3001/weather", { searchTerm })
+        .post("https://troyweatherapp.herokuapp.com/weather", { searchTerm })
         .then((res) => {
           setData(res.data);
           setLoading(false);
