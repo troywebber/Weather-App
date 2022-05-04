@@ -39,9 +39,9 @@ function App() {
     city: data.name,
     country: data.sys.country,
     weather: data.weather[0].main,
-    temperature: data.main.temp,
-    humidity: data.main.humidity,
-    windSpeed: data.wind.speed,
+    temperature: Math.floor(data.main.temp),
+    humidity: Math.floor(data.main.humidity),
+    windSpeed: Math.floor(data.wind.speed),
   };
 
   return (
