@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Search from "../Search";
 import Result from "../Result";
+import axios from "axios";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("canterbury");
@@ -15,19 +16,20 @@ function App() {
 
   const handleSearchClick = (e) => {
     setSearchTerm(searchInput);
-    console.log(searchTerm, "searchTerms");
   };
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&appid=dab24259226e0fd181e3162226672161&units=metric`
-      );
-      const data = await response.json();
-      setData(data);
-      setLoading(false);
-      console.log(data);
-    }
+    const fetchData = async () => {
+      axios
+        .post("http://localhost:3001/weather", { searchTerm })
+        .then((res) => {
+          setData(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err, "error");
+        });
+    };
     fetchData();
   }, [searchTerm]);
 
